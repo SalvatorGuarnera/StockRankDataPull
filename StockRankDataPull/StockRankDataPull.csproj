@@ -8,5 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="83.0.4103.3900" />
+    <PackageReference Include="MailKit" Version="2.7.0" />
+    <PackageReference Include="MimeKit" Version="2.8.0" />
   </ItemGroup>
 </Project>
