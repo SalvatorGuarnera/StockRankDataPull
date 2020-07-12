@@ -25,9 +25,6 @@ namespace StockRankDataPull
             chromeOptions.AddArgument("headless");
             IWebDriver driver = new ChromeDriver(chromeOptions);
 
-
-            //string[] tickers = new string[] { "A", "AAPL" };
-
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
          
 
@@ -64,6 +61,7 @@ namespace StockRankDataPull
                 string liabilitiesUrl = "https://www.macrotrends.net/stocks/charts/" + ticker + "/apple/total-liabilities";
                 string epsUrl = "https://www.macrotrends.net/stocks/charts/" + ticker + "/apple/eps-earnings-per-share-diluted";
                 string sharesUrl = "https://www.macrotrends.net/stocks/charts/" + ticker + "/apple/shares-outstanding";
+                string stockPrice = "https://www.macrotrends.net/stocks/charts/" + ticker + "/apple/stock-price-history";
 
 
                 driver.Navigate().GoToUrl(assetsUrl);
@@ -72,6 +70,7 @@ namespace StockRankDataPull
                 string totalLiabilities;
                 string latestEPS;
                 string sharesOutstanding;
+                string stockPrice;
 
 
                 totalAssets = driver.FindElement(By.CssSelector("#main_content > div:nth-child(2) > span > ul > li:nth-child(1) > strong:nth-child(1)")).Text;
@@ -88,11 +87,16 @@ namespace StockRankDataPull
 
                 sharesOutstanding = driver.FindElement(By.CssSelector("#main_content > div:nth-child(2) > span > ul > li:nth-child(1) > strong:nth-child(1)")).Text;
 
+                driver.Navigate().GoToUrl(stockPrice);
+
+                stockPrice = driver.FindElement(By.CssSelector("#main_content > div:nth-child(2) > span > strong")).Text;
+
                 data.Add("ticker", ticker);
                 data.Add("totalAssets", totalAssets);
                 data.Add("totalLiabilities", totalLiabilities);
                 data.Add("eps", latestEPS);
                 data.Add("sharesOutstanding", sharesOutstanding);
+                data.Add("stockPrice", stockPrice);
             }
             catch
             {
@@ -129,7 +133,7 @@ namespace StockRankDataPull
 
             message.Body = new TextPart("plain")
             {
-                Text = "Finished updating asset data"
+                Text = "Finished updating stock data."
             };
 
             using (var mailingClient = new SmtpClient())
