@@ -70,7 +70,7 @@ namespace StockRankDataPull
                 string totalLiabilities;
                 string latestEPS;
                 string sharesOutstanding;
-                string stockPrice;
+                string stockQuote;
 
 
                 totalAssets = driver.FindElement(By.CssSelector("#main_content > div:nth-child(2) > span > ul > li:nth-child(1) > strong:nth-child(1)")).Text;
@@ -89,14 +89,14 @@ namespace StockRankDataPull
 
                 driver.Navigate().GoToUrl(stockPrice);
 
-                stockPrice = driver.FindElement(By.CssSelector("#main_content > div:nth-child(2) > span > strong")).Text;
+                stockQuote = driver.FindElement(By.CssSelector("#main_content > div:nth-child(2) > span > strong")).Text;
 
                 data.Add("ticker", ticker);
                 data.Add("totalAssets", totalAssets);
                 data.Add("totalLiabilities", totalLiabilities);
                 data.Add("eps", latestEPS);
                 data.Add("sharesOutstanding", sharesOutstanding);
-                data.Add("stockPrice", stockPrice);
+                data.Add("stockPrice", stockQuote);
             }
             catch
             {

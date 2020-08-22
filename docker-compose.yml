@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  StockRankDataPull:
+    image: ${DOCKER_REGISTRY-}StockRankDataPull
+    build:
+      context: .
+      dockerfile: StockRankDataPull/Dockerfile
